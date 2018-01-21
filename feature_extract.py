@@ -6,10 +6,19 @@ Created on Sat Jan 20 22:56:59 2018
 @author: childrenbody
 """
 import pandas as pd
-from collections import Counter
 
 
-
+# =============================================================================
+# # result/1.2.csv
+# # 取九月份和十月份零售量的均值。
+# October = pd.read_csv('result/1.0.csv')
+# September = pd.read_csv('result/1.1.csv')
+# o = October.predict_quantity.as_matrix()
+# s = September.predict_quantity.as_matrix()
+# result = October[['predict_date', 'class_id']]
+# result['predict_quantity'] = (o + s)/2
+# result.to_csv('result/1.2.csv', index=False)
+# =============================================================================
 # =============================================================================
 # # result/1.0.csv
 # # 把2017年11月的数据作为结果提交，相同型号车的销量相加。 
