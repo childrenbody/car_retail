@@ -22,10 +22,15 @@ class train_info():
         date_class = {d: self.train[self.train.sale_date == d].class_id.nunique() for d in date}
         return date_class
 
-    def class_sale_date(self, class_id) -> 'array type':
+    def class_sale_date(self, class_id, plot=False) -> 'array type':
         '''
         车型ID为class_id的销售月份。
         '''
-        return self.train[self.train.class_id == class_id]['sale_date'].unique()
+        temp = self.train[self.train.class_id == class_id][['sale_date', 'class_id', 'sale_quantity']]
+        result = temp['sale_date'].unique()
+        if plot:
+            temp['sale_date'] = pd.to_datetime(temp['sale_date'], format='%Y%m')
+            temp.plot(x='sale_date', y='sale_quantity')
+        return result
         
         
