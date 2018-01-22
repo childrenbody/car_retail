@@ -7,6 +7,16 @@ Created on Sat Jan 20 22:56:59 2018
 """
 import pandas as pd
 
+# result/1.2.1.csv
+# 取九月份和十月份的零售量。九月份权重为0.4，十月份为0.6。
+October = pd.read_csv('result/1.0.csv')
+September = pd.read_csv('result/1.1.csv')
+o = October.predict_quantity.as_matrix()
+s = September.predict_quantity.as_matrix()
+result = October[['predict_date', 'class_id']]
+result['predict_quantity'] = o*0.6 + s*0.4
+result.to_csv('result/1.2.1.csv', index=False)
+
 
 # =============================================================================
 # # result/1.2.csv
@@ -19,6 +29,7 @@ import pandas as pd
 # result['predict_quantity'] = (o + s)/2
 # result.to_csv('result/1.2.csv', index=False)
 # =============================================================================
+
 # =============================================================================
 # # result/1.0.csv
 # # 把2017年11月的数据作为结果提交，相同型号车的销量相加。 
