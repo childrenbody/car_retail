@@ -9,6 +9,7 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 import gc
+from tools import expend
 
 # =============================================================================
 # # result/2.1.csv
@@ -29,13 +30,17 @@ import gc
 #                     '201710': more[more.sale_date == 201710].sale_quantity.tolist()})
 # del train, less, more
 # gc.collect()
+# test = data[['201708', '201709', '201710', 'class_id']]
+# data = expend(data, ['201707', '201708', '201709'], ['class_id', '201710'], 100, 0.1)
 # x_train, x_test, y_train, y_test = train_test_split(data[['201707', '201708', '201709']].as_matrix(), data['201710'].tolist(), test_size=0.3)
 # watch_train = xgb.DMatrix(x_train, y_train)
 # watch_test = xgb.DMatrix(x_test, y_test)
 # watchlist = [(watch_train, 'train'), (watch_test, 'test')]
 # xgbtrain = xgb.DMatrix(data[['201707', '201708', '201709']].as_matrix(), data['201710'].tolist())
-# xgbtest = xgb.DMatrix(data[['201708', '201709', '201710']].as_matrix())
-# res = data[['class_id']]
+# xgbtest = xgb.DMatrix(test[['201708', '201709', '201710']].as_matrix())
+# res = test[['class_id']]
+# del data, x_train, x_test, y_train, y_test, test
+# gc.collect()
 # param = {'objective': 'reg:linear',
 #          'eval_metric': 'rmse'
 #         }

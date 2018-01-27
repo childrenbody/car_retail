@@ -6,6 +6,8 @@ Created on Sat Jan 20 23:12:30 2018
 @author: childrenbody
 """
 import pandas as pd
+import gc
+import numpy as np
 
 class train_info():
     '''
@@ -54,5 +56,22 @@ class train_info():
                 return date[:i+1]
         else:
             return date
+
+def expend(data, feature, label, multiple, noise) -> 'dataframe':
+    '''
     
-    
+    '''
+    label = data[label]
+    data = data[feature]
+    gc.collect()
+    temp_data = pd.DataFrame()
+    temp_label = pd.DataFrame()
+    for i in range(multiple - 1):
+        temp = data.as_matrix() + (np.random.random(data.shape) - 0.5)*2*noise
+        temp = pd.DataFrame(temp)
+        temp.columns = data.columns
+        temp_data = pd.concat([temp_data, temp], axis=0)
+        temp_label = pd.concat([temp_label, label], axis=0)
+    data = pd.concat([data, temp_data], axis=0)
+    label = pd.concat([label, temp_label], axis=0)
+    return pd.concat([data, label], axis=1)
