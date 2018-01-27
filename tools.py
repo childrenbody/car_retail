@@ -43,3 +43,16 @@ class train_info():
         sale_date = set(sale_date[:sale_date.index(earliest) + 1])
         return len(sale_date) == len(class_date), list(sale_date.difference(class_date))
         
+    def interrupted_month(date: 'str by "," split') -> 'uninterrupted months, str':
+        '''
+        从201710开始，返回连续的月份。
+        '''
+        date = map(int, date.split(','))
+        date = sorted(date, reverse=True)
+        for i in range(len(date) - 1):
+            if date[i] - date[i + 1] not in [1, 89]:
+                return date[:i+1]
+        else:
+            return date
+    
+    
